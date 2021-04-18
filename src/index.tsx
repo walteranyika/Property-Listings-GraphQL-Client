@@ -1,12 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import {ApolloClient ,InMemoryCache }from '@apollo/client';
+import {ApolloProvider} from '@apollo/react-hooks'
 import reportWebVitals from './reportWebVitals';
+import {Listings} from "./sections/Listings";
+import './styles/index.css';
 
+const client =new ApolloClient({
+    uri:"http://localhost:9000/api",
+    cache:new InMemoryCache()
+});
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <ApolloProvider client={client}>
+        <Listings title="Tinyhouse App"/>
+    </ApolloProvider>
+
   </React.StrictMode>,
   document.getElementById('root')
 );
